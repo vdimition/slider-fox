@@ -11,7 +11,7 @@ export const Footer = () => {
   return (
     <footer
       className={
-        'flex lg:hidden justify-around w-full pt-2.5 px-2 pb-3.5 border-t border-t-[#EAEAEA] bg-[#F5F5F5]'
+        'flex lg:hidden justify-around w-full pt-2.5 px-2 pb-3.5 border-t border-t-[#EAEAEA] bg-[#F5F5F5] sticky bottom-0 left-0'
       }>
       {links.map(({ icon, name, href }) => (
         <Link

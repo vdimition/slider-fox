@@ -14,7 +14,9 @@ export const Header = () => {
 
   return (
     <header
-      className={'flex w-full justify-between p-3 md:px-10 lg:py-6 lg:px-[120px] items-center'}>
+      className={
+        'flex w-full justify-between p-3 md:px-10 lg:py-6 lg:px-[120px] items-center sticky top-0 left-0 bg-white'
+      }>
       <Link href={'/'}>
         <div className={'hidden md:block'}>
           <Logo />

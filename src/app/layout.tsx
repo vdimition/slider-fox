@@ -18,9 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} min-h-screen `}>
+      <body
+        className={`${montserrat.className} min-h-[480px] h-screen overflow-hidden flex flex-col justify-between`}>
         <Header />
-        {children}
+        <div className={'overflow-auto w-full h-full'}>{children}</div>
         <Footer />
       </body>
     </html>
