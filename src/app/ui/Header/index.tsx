@@ -1,23 +1,13 @@
 'use client';
-import { JSX } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Logo } from '@/app/ui/Logo';
-import { Bonus } from '@/app/lib/icons/Bonus';
-import { Ongoing } from '@/app/lib/icons/Ongoing';
-import { Discover } from '@/app/lib/icons/Discover';
-import { Withdraw } from '@/app/lib/icons/Withdraw';
-import { LogoSmall } from '@/app/ui/LogoSmall';
 import clsx from 'clsx';
 
-const links: { name: string; href: string; icon: JSX.Element }[] = [
-  { name: 'Discover', href: '/discover', icon: <Discover /> },
-  { name: 'Bonus', href: '/bonus', icon: <Bonus /> },
-  { name: 'Ongoing', href: '/ongoing', icon: <Ongoing /> },
-  { name: 'Withdraw', href: '/withdraw', icon: <Withdraw /> }
-];
+import { Logo } from '@/app/ui/Logo';
+import { links } from '@/app/lib/constants/navLinks';
+import { LogoSmall } from '@/app/ui/LogoSmall';
 
 export const Header = () => {
   const pathname = usePathname();
@@ -34,18 +24,18 @@ export const Header = () => {
         </div>
       </Link>
 
-      <div className={'flex gap-8'}>
+      <div className={'hidden lg:flex gap-8'}>
         {links.map(({ icon, name, href }) => (
           <Link
             key={name}
             href={href}
             className={clsx(
-              'hidden lg:flex items-center gap-1 text-[#565656] hover:text-[#FF6915] font-semibold',
+              'flex items-center gap-1 text-[#565656] hover:text-[#FF6915] font-semibold',
               {
                 'text-[#FF6915]': pathname === href
               }
             )}>
-            {icon}
+            <div className={'w-5'}>{icon}</div>
             <span>{name}</span>
           </Link>
         ))}
