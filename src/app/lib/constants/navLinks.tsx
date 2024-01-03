@@ -9,7 +9,7 @@ type Link = { name: string; href: string; icon: JSX.Element };
 
 export const links: Link[] = [
   { name: 'Discover', href: '/discover', icon: <Discover /> },
-  { name: 'Bonus', href: '/bonus', icon: <Bonus /> },
+  { name: 'Withdraw', href: '/withdraw', icon: <Withdraw /> },
   { name: 'Ongoing', href: '/ongoing', icon: <Ongoing /> },
-  { name: 'Withdraw', href: '/withdraw', icon: <Withdraw /> }
+  { name: 'Bonus', href: '/bonus', icon: <Bonus /> }
 ];
