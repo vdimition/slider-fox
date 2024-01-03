@@ -8,6 +8,7 @@ import fox2 from '@/app/lib/images/fox_2.png';
 import fox3 from '@/app/lib/images/fox_3.png';
 import fox4 from '@/app/lib/images/fox_4.png';
 import { Arrow } from '@/app/lib/icons/Arrow';
+import { useSwipeable } from 'react-swipeable';
 
 const slides = [
   {
@@ -51,10 +52,13 @@ export const Slider = () => {
   const onPrev = () => setActiveSlide((current) => (current > 0 ? current - 1 : 0));
   const onNext = () =>
     setActiveSlide((current) => (current > slides.length - 1 ? slides.length - 1 : current + 1));
-
+  const handlers = useSwipeable({
+    onSwipedLeft: onNext,
+    onSwipedRight: onPrev
+  });
   return (
     <div>
-      <div className={'flex relative'}>
+      <div className={'flex relative overflow-hidden lg:overflow-visible'}>
         <button
           onClick={onPrev}
           disabled={activeSlide <= 0}
@@ -64,14 +68,18 @@ export const Slider = () => {
           )}>
           <Arrow />
         </button>
-        <div className={'w-[750px] overflow-hidden flex justify-center'}>
+        <div className={'w-screen md:w-[750px] overflow-hidden flex justify-center'}>
           <div
             ref={sliderWrapper}
             className={
               'transition-all duration-1000 flex items-center w-full justify-center overflow-hidden'
             }>
-            <div className={'w-[296px] h-[433px] flex items-end overflow-visible relative'}>
+            <div
+              className={
+                'w-[296px] h-[383px] md:h-[403px] lg:h-[433px] flex items-end overflow-visible relative'
+              }>
               <div
+                {...handlers}
                 className={`absolute left-0 bottom-0 h-72 flex items-end gap-4 transition-all duration-1000`}
                 style={{ left: `-${activeSlide * 218}px` }}>
                 {slides.map(({ title, image, imageClassName, imageActiveClassName }, index) => {
@@ -123,7 +131,7 @@ export const Slider = () => {
               'transition-all duration-1000 absolute top-0 left-0 w-full flex justify-center',
               index === activeSlide ? 'opacity-100' : 'opacity-0'
             )}>
-            <div className={'w-[375px]'}>
+            <div className={'w-[350px]'}>
               <div
                 className={
                   'text-center w-full text-[#303030] text-2xl font-bold tracking-[-0.5px;]'
