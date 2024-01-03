@@ -12,31 +12,31 @@ import { Arrow } from '@/app/lib/icons/Arrow';
 const slides = [
   {
     image: fox1,
-    imageClassName: 'min-w-[257px] bottom-[50px] left-[-27px] rotate-[-1deg]',
-    imageActiveClassName: 'min-w-[474px] bottom-[20px] left-[-99px]',
+    imageClassName: 'max-w-[164px] bottom-[50px] left-[12px] rotate-[-1deg]',
+    imageActiveClassName: 'max-w-[302px] bottom-[14px] left-[-27px]',
     title: 'Sign up for a 500 coin bonus',
     content: 'Gain access to wonderful free games and apps to explore, play and win coins.'
   },
   {
     image: fox2,
-    imageClassName: 'min-w-[251px] bottom-[49px] left-[-26px] rotate-[2deg]',
-    imageActiveClassName: 'min-w-[468px] bottom-[14px] left-[-90px] rotate-0',
+    imageClassName: 'max-w-[174px] bottom-[49px] left-[17px] rotate-[2deg]',
+    imageActiveClassName: 'max-w-[325px] bottom-[15px] left-[-12px] rotate-0',
     title: 'Choose your favorite app or game',
     content:
       'Browse “Discovery” page, select the app or game you love, tap "Get Started" to begin playing and reach 1000 coins on Scrambly.'
   },
   {
     image: fox3,
-    imageClassName: 'min-w-[250px] bottom-[50px] left-[-25px] rotate-[2deg]',
-    imageActiveClassName: 'min-w-[474px] rotate-0 bottom-[20px] left-[-99px]',
+    imageClassName: 'max-w-[156px] bottom-[50px] left-[25px] rotate-[2deg]',
+    imageActiveClassName: 'max-w-[294px] bottom-[13px] left-[-5px] rotate-0',
     title: 'Secure your account',
     content:
       'Complete our super-simple, lightning-fast ID verification to secure your account and earnings - it takes 4 minutes most.'
   },
   {
     image: fox4,
-    imageClassName: 'min-w-[320px] bottom-[47px] left-[-69px]',
-    imageActiveClassName: 'min-w-[570px] bottom-[15px] left-[-155px]',
+    imageClassName: 'max-w-[170px] bottom-[48px] left-[10px]',
+    imageActiveClassName: 'max-w-[304px] bottom-[15px] left-[-14px]',
     title: 'Make your 1st withdrawal',
     content:
       'Head to our “Withdraw” page, choose your preferred cashout method and redeem your coins. Your earnings will arrive in your wallet within 3 minutes – nice!'
@@ -59,10 +59,8 @@ export const Slider = () => {
           onClick={onPrev}
           disabled={activeSlide <= 0}
           className={clsx(
-            'hidden lg:block w-6 h-6 rotate-180 absolute left-[-100px] bottom-[137px]',
-            {
-              hidden: activeSlide <= 0
-            }
+            'w-6 h-6 rotate-180 absolute left-[-100px] bottom-[137px] transition-all duration-1000',
+            activeSlide <= 0 ? 'opacity-0' : 'opacity-0 lg:opacity-100'
           )}>
           <Arrow />
         </button>
@@ -80,7 +78,10 @@ export const Slider = () => {
                   const isActive = index === activeSlide;
 
                   return (
-                    <div key={title} className={clsx('w-full h-full relative flex items-center')}>
+                    <button
+                      key={title}
+                      onClick={() => setActiveSlide(index)}
+                      className={clsx('w-full h-full relative flex items-center')}>
                       <div
                         className={clsx(
                           'rounded-[40px] transition-all duration-1000 h-64',
@@ -97,7 +98,7 @@ export const Slider = () => {
                           isActive ? imageActiveClassName : imageClassName
                         )}
                       />
-                    </div>
+                    </button>
                   );
                 })}
               </div>
@@ -107,13 +108,14 @@ export const Slider = () => {
         <button
           onClick={onNext}
           disabled={activeSlide >= slides.length - 1}
-          className={clsx('hidden lg:block w-6 h-6 absolute right-[-100px] bottom-[137px]', {
-            hidden: activeSlide >= slides.length - 1
-          })}>
+          className={clsx(
+            'w-6 h-6 absolute right-[-100px] bottom-[137px] transition-all duration-1000',
+            activeSlide >= slides.length - 1 ? 'opacity-0' : 'opacity-0 lg:opacity-100'
+          )}>
           <Arrow />
         </button>
       </div>
-      <div className={'w-full h-32 flex justify-center relative'}>
+      <div className={'w-full h-32 mt-1 flex justify-center relative'}>
         {slides.map(({ title, content }, index) => (
           <div
             key={title}
@@ -135,7 +137,8 @@ export const Slider = () => {
       </div>
       <div className={'flex justify-center gap-1 my-6'}>
         {slides.map(({ title }, index) => (
-          <div
+          <button
+            onClick={() => setActiveSlide(index)}
             key={title}
             className={clsx(
               'h-1.5 transition-all duration-1000 rounded-full',
