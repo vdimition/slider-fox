@@ -51,7 +51,7 @@ export const Slider = () => {
 
   const onPrev = () => setActiveSlide((current) => (current > 0 ? current - 1 : 0));
   const onNext = () =>
-    setActiveSlide((current) => (current > slides.length - 1 ? slides.length - 1 : current + 1));
+    setActiveSlide((current) => (current >= slides.length - 1 ? slides.length - 1 : current + 1));
   const handlers = useSwipeable({
     onSwipedLeft: onNext,
     onSwipedRight: onPrev
